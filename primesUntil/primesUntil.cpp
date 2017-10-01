@@ -48,6 +48,10 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Now, we can actually get to computing primes.
+	// First, the constant 'seed' factors
+	// Seed factors are all primes less than 100.
+	std::vector<uint> factors({ 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,
+		53,59,61,67,71,73,79,83,89,97 });
     return 0;
 }
 
