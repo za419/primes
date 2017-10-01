@@ -12,7 +12,9 @@ bool isRelativelyPrime(uint number, const std::vector<uint>& factors) {
 	// Square root of the number
 	const auto root(static_cast<uint>(std::ceil(std::sqrt(static_cast<long double>(number)))));
 
-	for (size_t i = 0; i < factors.size(); ++i) {
+	const auto size(factors.size());
+
+	for (size_t i = 0; i < size; ++i) {
 		if (factors[i] > root) {
 			break;
 		}
