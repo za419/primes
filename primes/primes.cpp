@@ -14,7 +14,7 @@ int main()
 		53,59,61,67,71,73,79,83,89,97 });
 	// Attempt to reserve the maximum vector size immediately (since we're running forever)
 	try {
-		factors.reserve(factors.max_size);
+		factors.reserve(factors.max_size());
 	}
 	catch (...) {
 		// Doesn't matter if we couldn't reserve that

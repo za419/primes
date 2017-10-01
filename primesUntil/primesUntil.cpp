@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
 	catch (...) {
 		// If we couldn't reserve that many, try to reserve the maximum size
 		try {
-			factors.reserve(factors.max_size);
+			factors.reserve(factors.max_size());
 		}
 		catch (...) {
 			// That failed, just keep going
