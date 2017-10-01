@@ -1,29 +1,11 @@
 // primesUntil.cpp : Defines the entry point for the console application.
 //
 
+#include "../primes.h"
+
 #include <iostream>
-#include <vector>
-#include <cstdint>
 #include <cstdlib>
 #include <cmath>
-#include <sstream>
-
-using uint = std::uintmax_t;
-
-// Returns whether a number is prime according to a vector of factors
-// Factors must be sorted, with the smallest factors first, to work properly
-bool isRelativelyPrime(uint number, const std::vector<uint>& factors);
-
-// A basic cast based on stringstream
-// Obviously not as advanced as boost::lexical_cast...
-// But does the trick, with a long list of caveats
-template <class T, class U> T sstream_cast(const U& input) {
-	std::stringstream conv;
-	conv << input;
-	T out;
-	conv >> out;
-	return out;
-}
 
 void usage(const char* invoke) {
 	std::cout << "Usage: " << invoke << " max.\n";
@@ -76,21 +58,4 @@ int main(int argc, char* argv[]) {
 		}
 	}
     return 0;
-}
-
-bool isRelativelyPrime(uint number, const std::vector<uint>& factors) {
-	// Square root of the number
-	const auto root(static_cast<uint>(std::sqrt(static_cast<long double>(number))));
-
-	for (size_t i = 0; i < factors.size(); ++i) {
-		if (factors[i] > root) {
-			break;
-		}
-
-		if (number%factors[i] == 0) {
-			return false;
-		}
-	}
-
-	return true;
 }
