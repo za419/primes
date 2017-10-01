@@ -32,8 +32,7 @@ int main(int argc, char* argv[]) {
 		++min;
 	}
 
-	uint root(std::sqrt(max));
-	for (; min < root; min += 2) {
+	for (; min < max; min += 2) {
 		if (isPrime(min)) {
 			std::cout << min << '\n';
 		}
