@@ -6,11 +6,19 @@
 
 using uint = std::uintmax_t;
 
+// sqrt overload for uints
+namespace std {
+	// Non-standard behavior: Returns the smallest integer greater then the square root of the input
+	uint sqrt(uint number) {
+		return static_cast<uint>(std::ceil(std::sqrt(static_cast<long double>(number))));
+	}
+}
+
 // Returns whether a number is prime according to a vector of factors
 // Factors must be sorted, with the smallest factors first, to work properly
 bool isRelativelyPrime(uint number, const std::vector<uint>& factors) {
 	// Square root of the number
-	const auto root(static_cast<uint>(std::ceil(std::sqrt(static_cast<long double>(number)))));
+	const auto root(std::sqrt(number));
 
 	const auto size(factors.size());
 
@@ -25,6 +33,27 @@ bool isRelativelyPrime(uint number, const std::vector<uint>& factors) {
 	}
 
 	return true;
+}
+
+// Returns whether a number is prime, without any outside factors
+// Uses isRelativelyPrime repeatedly to generate a list of factors if the static one is too small
+bool isPrime(uint number) {
+	static std::vector<uint> factors({ 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,
+		53,59,61,67,71,73,79,83,89,97 });
+
+	size_t size = factors.size();
+	if (number>(factors[size-1]*factors[size-1])) { // Our factors are insufficiently large
+		// Generate and store more factors until we have enough
+		uint root(std::sqrt(number));
+		for (uint n = factors[size - 1]; n <= root; n+=2) {
+			if (isRelativelyPrime(n, factors)) {
+				factors.push_back(n);
+			}
+		}
+	}
+
+	// Now, we're sure that factors contains the necessary factors to run isRelativelyPrime for real
+	return isRelativelyPrime(number, factors);
 }
 
 // A basic cast based on stringstream
