@@ -19,5 +19,18 @@ int main()
 	catch (...) {
 		// Doesn't matter if we couldn't reserve that
 	}
+
+	// Print out all the precomputed primes
+	for (size_t i = 0; i < factors.size(); ++i) {
+		std::cout << factors[i] << '\n';
+	}
+
+	// Now, for computation
+	for (uint n = 99; ; n += 2) {
+		if (isRelativelyPrime(n, factors)) {
+			std::cout << n << '\n';
+			factors.push_back(n);
+		}
+	}
     return 0;
 }
