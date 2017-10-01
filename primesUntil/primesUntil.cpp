@@ -81,12 +81,12 @@ bool isRelativelyPrime(uint number, const std::vector<uint>& factors) {
 	// Square root of the number
 	const auto root(static_cast<uint>(std::sqrt(static_cast<long double>(number))));
 
-	for (const auto& factor : factors) {
-		if (factor > root) {
+	for (size_t i = 0; i < factors.size(); ++i) {
+		if (factors[i] > root) {
 			break;
 		}
 
-		if (number%factor == 0) {
+		if (number%factors[i] == 0) {
 			return false;
 		}
 	}
