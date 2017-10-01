@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 		size_t necessary(0);
 		// Compute necessary by a ratio
 		// The true number will be less than this
-		auto factor = static_cast<uint>(std::ceil(std::sqrt(static_cast<long double>(max))));
+		auto factor = std::sqrt(max);
 		necessary = (size_t)std::ceil(1.25506*(factor / std::log(factor)));
 		factors.reserve(necessary);
 	}
