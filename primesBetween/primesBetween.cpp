@@ -27,6 +27,17 @@ int main(int argc, char* argv[]) {
 	if (min > max) {
 		std::swap(min, max);
 	}
+
+	if (min % 2 == 0) {
+		++min;
+	}
+
+	uint root(std::sqrt(max));
+	for (; min < root; min += 2) {
+		if (isPrime(min)) {
+			std::cout << min << '\n';
+		}
+	}
     return 0;
 }
 
