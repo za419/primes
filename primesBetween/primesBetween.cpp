@@ -29,6 +29,9 @@ int main(int argc, char* argv[]) {
 	}
 
 	if (min % 2 == 0) {
+		if (min == 2) {
+			std::cout << "2\n";
+		}
 		++min;
 	}
 
