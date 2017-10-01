@@ -10,7 +10,7 @@ using uint = std::uintmax_t;
 // Factors must be sorted, with the smallest factors first, to work properly
 bool isRelativelyPrime(uint number, const std::vector<uint>& factors) {
 	// Square root of the number
-	const auto root(static_cast<uint>(std::sqrt(static_cast<long double>(number))));
+	const auto root(static_cast<uint>(std::ceil(std::sqrt(static_cast<long double>(number)))));
 
 	for (size_t i = 0; i < factors.size(); ++i) {
 		if (factors[i] > root) {
