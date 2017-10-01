@@ -45,6 +45,25 @@ bool isPrime(uint number) {
 	if (number>(factors[size-1]*factors[size-1])) { // Our factors are insufficiently large
 		// Generate and store more factors until we have enough
 		uint root(std::sqrt(number));
+
+		// Attempt to pre-reserve enough space to fit all the factors we neeed
+		try {
+			size_t necessary(0);
+			// Compute necessary by a ratio
+			// The true number will be less than this
+			necessary = (size_t)std::ceil(1.25506*(root / std::log(root)));
+			factors.reserve(necessary);
+		}
+		catch (...) {
+			// If we couldn't reserve that many, try to reserve the maximum size
+			try {
+				factors.reserve(factors.max_size());
+			}
+			catch (...) {
+				// That failed, just keep going
+			}
+		}
+
 		for (uint n = factors[size - 1]; n <= root; n+=2) {
 			if (isRelativelyPrime(n, factors)) {
 				factors.push_back(n);
