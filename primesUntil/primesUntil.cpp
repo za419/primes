@@ -35,6 +35,24 @@ int main(int argc, char* argv[]) {
 	// Seed factors are all primes less than 100.
 	std::vector<uint> factors({ 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,
 		53,59,61,67,71,73,79,83,89,97 });
+	// Attempt to pre-reserve enough space to fit all the factors we neeed
+	try {
+		size_t necessary(0);
+		// Compute necessary by a ratio
+		// The true number will be less than this
+		auto factor = static_cast<uint>(std::ceil(std::sqrt(static_cast<long double>(max))));
+		necessary = (size_t)std::ceil(1.25506*(factor / std::log(factor)));
+		factors.reserve(necessary);
+	}
+	catch (...) {
+		// If we couldn't reserve that many, try to reserve the maximum size
+		try {
+			factors.reserve(factors.max_size);
+		}
+		catch (...) {
+			// That failed, just keep going
+		}
+	}
 
 	// Check to see if all the requested primes are precomputed
 	if (max < 97) {
