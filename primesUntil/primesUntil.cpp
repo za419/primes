@@ -11,6 +11,7 @@
 using uint = std::uintmax_t;
 
 // Returns whether a number is prime according to a vector of factors
+// Factors must be sorted, with the smallest factors first, to work properly
 bool isRelativelyPrime(uint number, const std::vector<uint>& factors);
 
 // A basic cast based on stringstream
